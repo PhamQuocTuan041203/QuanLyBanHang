@@ -23,7 +23,6 @@ namespace GUI
         private void SetValue(bool param, bool isLoad)
         {
             txtId.Text = null;
-
             txtName.Text = null;
             txtQuantity.Text = null;
             txtUnitPrice.Text = null;
@@ -31,6 +30,7 @@ namespace GUI
             txtNote.Text = null;
             btnInsert.Enabled = param;
             pcbProduct.Image = null;
+
             if (isLoad)
             {
                 btnUpdate.Enabled = false;
@@ -78,13 +78,14 @@ namespace GUI
             gvProduct.Columns[4].HeaderText = "Đơn giá bán";
             gvProduct.Columns[5].HeaderText = "Hình ảnh";
             gvProduct.Columns[6].HeaderText = "Ghi chú";
+
             foreach (DataGridViewColumn item in gvProduct.Columns)
                 item.DividerWidth = 1;
 
             DataGridViewImageColumn imgCol = new DataGridViewImageColumn();
             imgCol = (DataGridViewImageColumn)gvProduct.Columns[5];
             imgCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            
+
             gvProduct.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvProduct.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvProduct.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -101,6 +102,7 @@ namespace GUI
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "Pictures files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png)|*.jpg; *.jpeg; *.jpe; *.jfif; *.png|All files (*.*)|*.*";
             open.Title = "Chọn ảnh";
+
             if (open.ShowDialog() == DialogResult.OK)
             {
                 fileAddress = open.FileName;
@@ -134,7 +136,7 @@ namespace GUI
                     int.Parse(txtQuantity.Text),
                     int.Parse(txtImportUnitPrice.Text),
                     int.Parse(txtUnitPrice.Text),
-                    ImageToByteArray(pcbProduct), 
+                    ImageToByteArray(pcbProduct),
                     txtNote.Text
                 );
                 if (busProduct.InsertProduct(dtoProduct))
@@ -168,7 +170,7 @@ namespace GUI
                 txtQuantity.Text = gvProduct.CurrentRow.Cells[2].Value.ToString();
                 txtImportUnitPrice.Text = gvProduct.CurrentRow.Cells[3].Value.ToString();
                 txtUnitPrice.Text = gvProduct.CurrentRow.Cells[4].Value.ToString();
-                
+
                 MemoryStream memoryStream = new MemoryStream((byte[])gvProduct.CurrentRow.Cells[5].Value);
                 pcbProduct.Image = Image.FromStream(memoryStream);
                 txtNote.Text = gvProduct.CurrentRow.Cells[6].Value.ToString();

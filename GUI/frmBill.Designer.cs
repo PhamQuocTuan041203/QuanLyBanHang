@@ -46,8 +46,9 @@
             this.guna2Panel1.Controls.Add(this.btnCreate);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(920, 95);
+            this.guna2Panel1.Size = new System.Drawing.Size(1227, 131);
             this.guna2Panel1.TabIndex = 2;
             // 
             // txtSearch
@@ -67,13 +68,13 @@
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtSearch.ForeColor = System.Drawing.Color.White;
             this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearch.Location = new System.Drawing.Point(216, 38);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearch.Location = new System.Drawing.Point(288, 47);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
             this.txtSearch.PlaceholderText = "Nhập tên KH để tìm kiếm";
             this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(252, 36);
+            this.txtSearch.Size = new System.Drawing.Size(336, 44);
             this.txtSearch.TabIndex = 4;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearchCustomer_TextChanged);
             // 
@@ -91,9 +92,10 @@
             this.btnCreate.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnCreate.ForeColor = System.Drawing.Color.White;
-            this.btnCreate.Location = new System.Drawing.Point(503, 34);
+            this.btnCreate.Location = new System.Drawing.Point(671, 42);
+            this.btnCreate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(135, 45);
+            this.btnCreate.Size = new System.Drawing.Size(180, 55);
             this.btnCreate.TabIndex = 0;
             this.btnCreate.Text = "Tạo hoá đơn";
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
@@ -104,11 +106,6 @@
             this.gvBill.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.gvBill.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.gvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gvBill.BackgroundColor = System.Drawing.Color.White;
-            this.gvBill.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gvBill.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.gvBill.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -118,6 +115,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gvBill.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gvBill.ColumnHeadersHeight = 35;
+            this.gvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -127,15 +125,15 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gvBill.DefaultCellStyle = dataGridViewCellStyle3;
             this.gvBill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvBill.EnableHeadersVisualStyles = false;
             this.gvBill.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gvBill.Location = new System.Drawing.Point(0, 95);
+            this.gvBill.Location = new System.Drawing.Point(0, 131);
+            this.gvBill.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gvBill.Name = "gvBill";
             this.gvBill.ReadOnly = true;
             this.gvBill.RowHeadersVisible = false;
+            this.gvBill.RowHeadersWidth = 51;
             this.gvBill.RowTemplate.Height = 35;
-            this.gvBill.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvBill.Size = new System.Drawing.Size(920, 446);
+            this.gvBill.Size = new System.Drawing.Size(1227, 535);
             this.gvBill.TabIndex = 3;
             this.gvBill.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gvBill.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -161,12 +159,13 @@
             // 
             // frmBill
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(920, 541);
+            this.ClientSize = new System.Drawing.Size(1227, 666);
             this.Controls.Add(this.gvBill);
             this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmBill";
             this.Text = "Hoá đơn";
             this.Load += new System.EventHandler(this.frmBill_Load);

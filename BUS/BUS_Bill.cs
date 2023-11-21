@@ -37,5 +37,10 @@ namespace BUS
         {
             return dalBill.GetRevenueInJuly();
         }
+
+        public double GetRevenueInNovember()
+        {
+            return dalBill.GetRevenueInNovember();
+        }
     }
 }

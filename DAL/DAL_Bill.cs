@@ -124,5 +124,22 @@ namespace DAL
                 _conn.Close();
             }
         }
+
+        public double GetRevenueInNovember()
+        {
+            try
+            {
+                _conn.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = _conn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GetRevenueInNovember";
+                return Convert.ToDouble(cmd.ExecuteScalar());
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
     }
 }
