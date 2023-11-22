@@ -65,10 +65,10 @@
             // 
             this.guna2Panel3.Controls.Add(this.gvProduct);
             this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2Panel3.Location = new System.Drawing.Point(0, 374);
+            this.guna2Panel3.Location = new System.Drawing.Point(0, 366);
             this.guna2Panel3.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel3.Name = "guna2Panel3";
-            this.guna2Panel3.Size = new System.Drawing.Size(1248, 340);
+            this.guna2Panel3.Size = new System.Drawing.Size(1248, 348);
             this.guna2Panel3.TabIndex = 4;
             // 
             // gvProduct
@@ -105,7 +105,7 @@
             this.gvProduct.RowHeadersVisible = false;
             this.gvProduct.RowHeadersWidth = 51;
             this.gvProduct.RowTemplate.Height = 35;
-            this.gvProduct.Size = new System.Drawing.Size(1248, 340);
+            this.gvProduct.Size = new System.Drawing.Size(1248, 348);
             this.gvProduct.TabIndex = 0;
             this.gvProduct.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gvProduct.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -248,7 +248,7 @@
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1248, 374);
+            this.guna2Panel1.Size = new System.Drawing.Size(1248, 366);
             this.guna2Panel1.TabIndex = 3;
             // 
             // pcbProduct
@@ -270,7 +270,7 @@
             this.txtId.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(153)))), ((int)(((byte)(149)))));
             this.txtId.BorderRadius = 6;
             this.txtId.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtId.DefaultText = "Auto";
+            this.txtId.DefaultText = "";
             this.txtId.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(153)))), ((int)(((byte)(149)))));
             this.txtId.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(81)))));
             this.txtId.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));

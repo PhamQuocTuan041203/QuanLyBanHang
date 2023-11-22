@@ -23,25 +23,22 @@ namespace GUI
         {
             //Chart configuration 
             chart.YAxes.GridLines.Display = false;
-            chart.Title.Text = "Doanh thu";
+            chart.Title.Text = "Doanh thu theo tháng";
 
             //Create a new dataset 
             var dataset = new GunaBarDataset();
-            //dataset.DataPoints.Add("Tháng 5", busBill.GetRevenueInMay());
-            //dataset.DataPoints.Add("Tháng 6", busBill.GetRevenueInJune());
-            //dataset.DataPoints.Add("Tháng 7", busBill.GetRevenueInJuly());
+            dataset.DataPoints.Add("Tháng 1", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 2", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 3", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 4", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 5", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 6", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 7", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 8", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 9", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 10", busBill.GetRevenueInNovember());
             dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 12", busBill.GetRevenueInNovember());
 
             //Add a new dataset to a chart.Datasets
             chart.Datasets.Add(dataset);
