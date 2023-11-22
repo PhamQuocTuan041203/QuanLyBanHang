@@ -35,7 +35,7 @@ namespace GUI
 
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
-            if (txtOldPassword.Text != "")
+            if (txtOldPassword.Text != "" && txtNewPassword.Text != "" && txtRepeatPassword.Text != "")
             {
                 if (txtNewPassword.Text == txtRepeatPassword.Text)
                 {
@@ -52,7 +52,7 @@ namespace GUI
                 }
                 else MessageBox.Show("Mật khẩu mới không trùng nhau!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else MessageBox.Show("Vui lòng nhập mật khẩu cũ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace GUI
             if (busEmployee.UpdateEmployeeAddressPhoneNumber(dtoEmployee))
             {
                 MessageBox.Show("Sửa thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            } 
+            }
             else
             {
                 MessageBox.Show("Không sửa được thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -71,6 +71,9 @@ namespace GUI
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadData();
+            txtOldPassword.Text = "";
+            txtNewPassword.Text = "";
+            txtRepeatPassword.Text = "";
         }
 
         private void frmAccount_Load(object sender, EventArgs e)

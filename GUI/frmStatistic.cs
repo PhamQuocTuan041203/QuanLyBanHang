@@ -23,28 +23,29 @@ namespace GUI
         {
             //Chart configuration 
             chart.YAxes.GridLines.Display = false;
-            chart.Title.Text = "Doanh thu theo tháng";
+            chart.Title.Text = "Tổng doanh thu tháng";
 
             //Create a new dataset 
-            var dataset = new GunaBarDataset();
-            dataset.DataPoints.Add("Tháng 1", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 2", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 3", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 4", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 5", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 6", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 7", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 8", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 9", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 10", busBill.GetRevenueInNovember());
+            var dataset = new GunaBarDataset
+            {
+                Label = "Doanh thu"
+            };
+            dataset.DataPoints.Add("Tháng 6", busBill.GetRevenueInMay());
+            dataset.DataPoints.Add("Tháng 7", busBill.GetRevenueInJune());
+            dataset.DataPoints.Add("Tháng 8", busBill.GetRevenueInJuly());
             dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
-            dataset.DataPoints.Add("Tháng 12", busBill.GetRevenueInNovember());
 
             //Add a new dataset to a chart.Datasets
             chart.Datasets.Add(dataset);
 
             //An update was made to re-render the chart
             chart.Update();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            chtImportProduct.Datasets.Clear();
+            Bar(chtImportProduct);
         }
     }
 }

@@ -44,17 +44,18 @@
             Guna.Charts.WinForms.Tick tick6 = new Guna.Charts.WinForms.Tick();
             Guna.Charts.WinForms.ChartFont chartFont16 = new Guna.Charts.WinForms.ChartFont();
             this.chtImportProduct = new Guna.Charts.WinForms.GunaChart();
+            this.btnRefresh = new Guna.UI2.WinForms.Guna2GradientButton();
             this.SuspendLayout();
             // 
             // chtImportProduct
             // 
             this.chtImportProduct.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.chtImportProduct.BackColor = System.Drawing.Color.White;
             chartFont9.FontName = "Arial";
             this.chtImportProduct.Legend.LabelFont = chartFont9;
-            this.chtImportProduct.Location = new System.Drawing.Point(12, 34);
+            this.chtImportProduct.Location = new System.Drawing.Point(16, 42);
+            this.chtImportProduct.Margin = new System.Windows.Forms.Padding(4);
             this.chtImportProduct.Name = "chtImportProduct";
-            this.chtImportProduct.Size = new System.Drawing.Size(912, 534);
+            this.chtImportProduct.Size = new System.Drawing.Size(1216, 657);
             this.chtImportProduct.TabIndex = 0;
             chartFont10.FontName = "Arial";
             chartFont10.Size = 12;
@@ -83,13 +84,36 @@
             this.chtImportProduct.ZAxes.Ticks = tick6;
             this.chtImportProduct.Load += new System.EventHandler(this.chtImportProduct_Load);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnRefresh.Animated = true;
+            this.btnRefresh.BorderRadius = 10;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnRefresh.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnRefresh.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnRefresh.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnRefresh.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Location = new System.Drawing.Point(1031, 80);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(171, 50);
+            this.btnRefresh.TabIndex = 4;
+            this.btnRefresh.Text = "Làm mới";
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // frmStatistic
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 580);
+            this.ClientSize = new System.Drawing.Size(1248, 714);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.chtImportProduct);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmStatistic";
             this.Text = "Thống kê";
             this.ResumeLayout(false);
@@ -99,5 +123,6 @@
         #endregion
 
         private Guna.Charts.WinForms.GunaChart chtImportProduct;
+        private Guna.UI2.WinForms.Guna2GradientButton btnRefresh;
     }
 }
