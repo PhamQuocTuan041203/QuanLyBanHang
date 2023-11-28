@@ -2,8 +2,10 @@
 using DTO;
 using System;
 using System.Data;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BUS
 {
@@ -103,27 +105,41 @@ namespace BUS
         {
             Random r = new Random();
             StringBuilder builder = new StringBuilder();
-            builder.Append(RandomString(4, true));
-            builder.Append(r.Next(1000, 9999));
-            builder.Append(RandomString(2, false));
+            builder.Append(RandomString(3));
+            builder.Append(r.Next(100, 999));
             return builder.ToString();
         }
 
-        private string RandomString(int size, bool lowerCase)
+        private string RandomString(int size)
         {
             StringBuilder builder = new StringBuilder();
             Random r = new Random();
             char ch;
             for (int i = 0; i < size; i++)
             {
-                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * r.NextDouble() + 65)));
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * r.NextDouble() + 97)));
                 builder.Append(ch);
             }
-            if (lowerCase)
+            return builder.ToString();
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            try
             {
-                return builder.ToString().ToUpper();
+                MailAddress mail = new MailAddress(email);
+                return true;
             }
-            else return builder.ToString().ToLower();
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool IsValidPhoneNumber(string phoneNumber)
+        {
+            string phonePattern = @"^0\d{9}$";
+            return Regex.IsMatch(phoneNumber, phonePattern);
         }
     }
 }

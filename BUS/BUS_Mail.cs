@@ -23,17 +23,19 @@ namespace BUS
                 MailMessage mailMsg = new MailMessage();
                 mailMsg.From = new MailAddress(senderEmail);
                 mailMsg.To.Add(recipientEmail);
+
                 if (isUpdate)
                 {
+                    mailMsg.Subject = "Cấp lại mật khẩu phần mềm!";
                     mailMsg.Body = "Chào bạn, mật khẩu mới truy cập vào phần mềm của bạn là: " + recipientPassword;
-                    mailMsg.Subject = "Bạn đã yêu cầu cấp lại mật khẩu!";
                 }
                 else
                 {
-                    mailMsg.Body = string.Format("Chào mừng bạn đã được thêm vào danh sách nhân viên của phần mềm với " +
-                                                 "thông tin đăng nhập là: \n- Email: {0} \n- Mật khẩu: {1} ", recipientEmail, recipientPassword);
                     mailMsg.Subject = "Thông tin đăng nhập phần mềm!";
+                    mailMsg.Body = string.Format("Chào mừng bạn đã trở thành nhân viên của Công ty QuocTuanFashion, thông tin đăng nhập là:" +
+                        "\n- Email: {0} \n- Mật khẩu: {1} ", recipientEmail, recipientPassword);
                 }
+
                 using (SmtpClient client = new SmtpClient())
                 {
                     client.EnableSsl = true;
@@ -44,7 +46,7 @@ namespace BUS
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;
                     client.Send(mailMsg);
                 }
-                return "Vui lòng kiểm tra Email để nhận mật khẩu mới!";
+                return "Kiểm tra Email để nhận mật khẩu!";
             }
             catch (Exception e)
             {
@@ -56,27 +58,22 @@ namespace BUS
         {
             Random r = new Random();
             StringBuilder builder = new StringBuilder();
-            builder.Append(RandomString(4, true));
-            builder.Append(r.Next(1000, 9999));
-            builder.Append(RandomString(2, false));
+            builder.Append(RandomString(3));
+            builder.Append(r.Next(100, 999));
             return builder.ToString();
         }
 
-        private string RandomString(int size, bool lowerCase)
+        private string RandomString(int size)
         {
             StringBuilder builder = new StringBuilder();
             Random r = new Random();
             char ch;
             for (int i = 0; i < size; i++)
             {
-                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * r.NextDouble() + 65)));
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * r.NextDouble() + 97)));
                 builder.Append(ch);
             }
-            if (lowerCase)
-            {
-                return builder.ToString().ToUpper();
-            }
-            else return builder.ToString().ToLower();
+            return builder.ToString();
         }
     }
 }

@@ -3,6 +3,7 @@ using DTO;
 using System;
 using System.Data;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace GUI
@@ -25,7 +26,6 @@ namespace GUI
             gvEmployee.DataSource = busEmployee.ListOfEmployees();
             LoadGridView();
             SetValue(true, false);
-            txtName.Focus();
         }
 
         private void LoadGridView()
@@ -58,6 +58,9 @@ namespace GUI
             radEmployee.Enabled = param;
             radAdmin.Enabled = param;
             txtName.Focus();
+            radEmployee.Checked = true;
+            radActive.Checked = true;
+
             if (isLoad)
             {
                 btnUpdate.Enabled = false;
@@ -67,21 +70,6 @@ namespace GUI
             {
                 btnUpdate.Enabled = !param;
                 btnDelete.Enabled = !param;
-            }
-            radEmployee.Checked = true;
-            radActive.Checked = true;
-        }
-
-        private bool IsValidEmail(string email)
-        {
-            try
-            {
-                MailAddress mail = new MailAddress(email);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
             }
         }
 
@@ -93,36 +81,9 @@ namespace GUI
                 MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnInsert_Click(object sender, EventArgs e)
-        {
-            if (txtAddress.Text != "" && txtEmail.Text != "" && txtName.Text != ""
-                && txtPhoneNumber.Text != "")
-            {
-                if (IsValidEmail(txtEmail.Text))
-                {
-                    role = radAdmin.Checked;
-                    status = radActive.Checked;
-                    string password = busEmployee.GetRandomPassword();
-                    DTO_Employee dtoEmployee = new DTO_Employee(txtName.Text, txtAddress.Text, txtPhoneNumber.Text, txtEmail.Text, role, status, password);
-                    if (busEmployee.InsertEmployee(dtoEmployee))
-                    {
-                        SetValue(false, true);
-                        gvEmployee.DataSource = busEmployee.ListOfEmployees();
-                        LoadGridView();
-                        SendMail sendMail = new SendMail(dtoEmployee.Email, password);
-                        sendMail.ShowDialog();
-                        MsgBox(sendMail.Result);
-                    }
-                    else
-                        MsgBox("Không thêm nhân viên được!", true);
-                }
-                else MsgBox("Email không đúng định dạng!", true);
-            }
-            else MsgBox("Thiếu trường thông tin!", true);
-        }
-
         private void gvEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            btnInsert.Enabled = false;
             btnUpdate.Enabled = true;
             btnDelete.Enabled = true;
             radNonActive.Enabled = true;
@@ -136,6 +97,7 @@ namespace GUI
             txtEmail.Text = gvEmployee.CurrentRow.Cells[4].Value.ToString();
             role = bool.Parse(gvEmployee.CurrentRow.Cells[5].Value.ToString());
             status = bool.Parse(gvEmployee.CurrentRow.Cells[6].Value.ToString());
+
             if (role)
                 radAdmin.Checked = true;
             else
@@ -146,39 +108,86 @@ namespace GUI
                 radNonActive.Checked = true;
         }
 
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            if (txtAddress.Text != "" && txtEmail.Text != "" && txtName.Text != ""
+                && txtPhoneNumber.Text != "")
+            {
+                if (busEmployee.IsValidEmail(txtEmail.Text))
+                {
+                    if (busEmployee.IsExistEmail(txtPhoneNumber.Text))
+                    {
+                        if (busEmployee.IsValidPhoneNumber(txtPhoneNumber.Text))
+                        {
+                            role = radAdmin.Checked;
+                            status = radActive.Checked;
+                            string password = busEmployee.GetRandomPassword();
+                            DTO_Employee dtoEmployee = new DTO_Employee(txtName.Text, txtAddress.Text, txtPhoneNumber.Text, txtEmail.Text, role, status, password);
+
+                            if (busEmployee.InsertEmployee(dtoEmployee))
+                            {
+                                SetValue(true, false);
+                                gvEmployee.DataSource = busEmployee.ListOfEmployees();
+                                LoadGridView();
+                                SendMail sendMail = new SendMail(dtoEmployee.Email, password);
+                                sendMail.ShowDialog();
+                                MsgBox("Nhân viên đã được thêm mới.\n"
+                                    + sendMail.Result);
+                            }
+                            else
+                                MsgBox("Không thể thêm nhân viên!", true);
+                        }
+                        else MsgBox("Số Phone không đúng định dạng!", true);
+                    }
+                    else MsgBox("Email đã tồn tại!", true);
+                }
+                else MsgBox("Email không đúng định dạng!", true);
+            }
+            else MsgBox("Thiếu trường thông tin!", true);
+        }
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (txtAddress.Text != "" && txtEmail.Text != "" && txtName.Text != ""
                && txtPhoneNumber.Text != "")
             {
-                role = radAdmin.Checked;
-                status = radActive.Checked;
-                DTO_Employee dtoEmployee = new DTO_Employee(txtName.Text, txtAddress.Text, txtPhoneNumber.Text, txtEmail.Text, role, status);
-                if (busEmployee.UpdateEmployee(dtoEmployee))
+                if (busEmployee.IsValidPhoneNumber(txtPhoneNumber.Text))
                 {
-                    SetValue(true, false);
-                    gvEmployee.DataSource = busEmployee.ListOfEmployees();
-                    LoadGridView();
+                    role = radAdmin.Checked;
+                    status = radActive.Checked;
+                    DTO_Employee dtoEmployee = new DTO_Employee(txtName.Text, txtAddress.Text, txtPhoneNumber.Text, txtEmail.Text, role, status);
+                    if (busEmployee.UpdateEmployee(dtoEmployee))
+                    {
+                        SetValue(true, false);
+                        gvEmployee.DataSource = busEmployee.ListOfEmployees();
+                        LoadGridView();
+                        MsgBox("Cập nhật nhân viên thành công!");
+                    }
+                    else
+                        MsgBox("Không thể cập nhật nhân viên!", true);
                 }
-                else
-                    MsgBox("Sửa nhân viên không thành công!", true);
+                else MsgBox("Số Phone không đúng định dạng!", true);
             }
             else MsgBox("Thiếu trường thông tin!", true);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            id = int.Parse(gvEmployee.CurrentRow.Cells[0].Value.ToString());
-            if (busEmployee.DeleteEmployee(id))
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                SetValue(true, false);
-                gvEmployee.DataSource = busEmployee.ListOfEmployees();
-                LoadGridView();
+                id = int.Parse(gvEmployee.CurrentRow.Cells[0].Value.ToString());
+                if (busEmployee.DeleteEmployee(id))
+                {
+                    SetValue(true, false);
+                    gvEmployee.DataSource = busEmployee.ListOfEmployees();
+                    LoadGridView();
+                    MsgBox("Xóa nhân viên thành công!");
+                }
+                else
+                    MsgBox("Xóa nhân viên không thành công", true);
             }
-            else
-                MsgBox("Xóa nhân viên không thành công", true);
         }
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             name = txtSearch.Text.Trim();
@@ -197,11 +206,6 @@ namespace GUI
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             SetValue(true, false);
-        }
-
-        private void frmEmployee_Shown(object sender, EventArgs e)
-        {
-            txtName.Focus();
         }
     }
 }

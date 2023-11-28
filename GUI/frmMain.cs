@@ -21,11 +21,13 @@ namespace GUI
             {
                 btnEmployee.Visible = false;
                 btnStatistic.Visible = false;
-                btnProduct.Checked = true;
-                fProduct.TopLevel = false;
-                fProduct.Dock = DockStyle.Fill;
-                pnlBody.Controls.Add(fProduct);
-                fProduct.Show();
+                btnProduct.Visible = false;
+
+                btnCustomer.Checked = true;
+                fCustomer.TopLevel = false;
+                fCustomer.Dock = DockStyle.Fill;
+                pnlBody.Controls.Add(fCustomer);
+                fCustomer.Show();
             }
             else
             {

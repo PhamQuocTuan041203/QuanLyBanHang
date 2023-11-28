@@ -19,54 +19,47 @@ namespace GUI
             {
                 if (busEmployee.Login(txtEmail.Text, txtPassword.Text))
                 {
-                    Properties.Settings.Default.isSave = tglRememberMe.Checked;
-                    if (tglRememberMe.Checked)
-                    {
-                        Properties.Settings.Default.email = txtEmail.Text;
-                        Properties.Settings.Default.password = txtPassword.Text;
-                    }
-                    Properties.Settings.Default.Save();
                     frmMain fMain = new frmMain(txtEmail.Text);
                     this.Hide();
                     fMain.ShowDialog();
                     this.Show();
+
+                    txtEmail.Text = "";
+                    txtPassword.Text = "";
                 }
                 else
                 {
-                    MessageBox.Show("Sai email hoặc mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Sai thông tin đăng nhập!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtEmail.Text = "";
                     txtPassword.Text = "";
-                    txtEmail.Focus();
                 }
             }
-        }
-
-        private void frmLogin_Load(object sender, EventArgs e)
-        {
-            if (Properties.Settings.Default.isSave)
-            {
-                txtEmail.Text = Properties.Settings.Default.email;
-                txtPassword.Text = Properties.Settings.Default.password;
-                tglRememberMe.Checked = true;
-            }
+            else
+                MessageBox.Show("Chưa nhập đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void lblForgotPassword_Click(object sender, EventArgs e)
         {
             if (txtEmail.Text != "")
             {
+                txtEmail.Focus();
                 busEmployee = new BUS_Employee();
                 if (busEmployee.IsExistEmail(txtEmail.Text))
                 {
-                    string password = busEmployee.GetRandomPassword();
-                    if (busEmployee.UpdatePassword(txtEmail.Text, password))
+                    DialogResult result = MessageBox.Show("Hệ thống sẽ gửi mật khẩu mới đến Gmail của bạn?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
                     {
-                        SendMail loader = new SendMail(txtEmail.Text, password, true);
-                        loader.ShowDialog();
-                        MessageBox.Show(loader.Result, "Thông báo");
+                        string password = busEmployee.GetRandomPassword();
+                        if (busEmployee.UpdatePassword(txtEmail.Text, password))
+                        {
+                            SendMail loader = new SendMail(txtEmail.Text, password, true);
+                            loader.ShowDialog();
+                            MessageBox.Show("Mật khẩu đã được tạo mới.\n"
+                                + loader.Result, "Thông báo");
+                        }
+                        else
+                            MessageBox.Show("Không thực hiện được", "Thông báo");
                     }
-                    else
-                        MessageBox.Show("Không thực hiện được", "Thông báo");
                 }
             }
         }

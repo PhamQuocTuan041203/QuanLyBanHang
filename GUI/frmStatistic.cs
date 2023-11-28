@@ -1,7 +1,9 @@
 ﻿using BUS;
 using Guna.Charts.WinForms;
 using System;
+using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace GUI
 {
@@ -21,24 +23,29 @@ namespace GUI
 
         public void Bar(GunaChart chart)
         {
-            //Chart configuration 
+            // Chart configuration 
             chart.YAxes.GridLines.Display = false;
             chart.Title.Text = "Tổng doanh thu tháng";
 
-            //Create a new dataset 
             var dataset = new GunaBarDataset
             {
                 Label = "Doanh thu"
             };
-            dataset.DataPoints.Add("Tháng 6", busBill.GetRevenueInMay());
-            dataset.DataPoints.Add("Tháng 7", busBill.GetRevenueInJune());
-            dataset.DataPoints.Add("Tháng 8", busBill.GetRevenueInJuly());
+
+            dataset.DataPoints.Add("Tháng 1", busBill.GetRevenueInJanuary());
+            dataset.DataPoints.Add("Tháng 2", busBill.GetRevenueInFebruary());
+            dataset.DataPoints.Add("Tháng 3", busBill.GetRevenueInMarch());
+            dataset.DataPoints.Add("Tháng 4", busBill.GetRevenueInApril());
+            dataset.DataPoints.Add("Tháng 5", busBill.GetRevenueInMay());
+            dataset.DataPoints.Add("Tháng 6", busBill.GetRevenueInJune());
+            dataset.DataPoints.Add("Tháng 7", busBill.GetRevenueInJuly());
+            dataset.DataPoints.Add("Tháng 8", busBill.GetRevenueInAugust());
+            dataset.DataPoints.Add("Tháng 9", busBill.GetRevenueInSeptember());
+            dataset.DataPoints.Add("Tháng 10", busBill.GetRevenueInOctober());
             dataset.DataPoints.Add("Tháng 11", busBill.GetRevenueInNovember());
+            dataset.DataPoints.Add("Tháng 12", busBill.GetRevenueInDecember());
 
-            //Add a new dataset to a chart.Datasets
             chart.Datasets.Add(dataset);
-
-            //An update was made to re-render the chart
             chart.Update();
         }
 

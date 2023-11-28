@@ -597,7 +597,6 @@
             this.Name = "frmEmployee";
             this.Text = "Nhân viên";
             this.Load += new System.EventHandler(this.frmEmployee_Load);
-            this.Shown += new System.EventHandler(this.frmEmployee_Shown);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2GroupBox2.ResumeLayout(false);
