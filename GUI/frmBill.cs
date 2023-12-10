@@ -29,15 +29,18 @@ namespace GUI
         {
             gvBill.Columns[0].HeaderText = "Mã HD";
             gvBill.Columns[1].HeaderText = "Tên KH";
-            gvBill.Columns[2].HeaderText = "Thời gian";
-            gvBill.Columns[3].HeaderText = "Tổng tiền";
+            gvBill.Columns[2].HeaderText = "Tên NV";
+            gvBill.Columns[3].HeaderText = "Thời gian";
+            gvBill.Columns[4].HeaderText = "Tổng tiền";
+
             foreach (DataGridViewColumn item in gvBill.Columns)
             {
                 item.DividerWidth = 1;
             }
+
             gvBill.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvBill.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvBill.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvBill.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private void txtSearchCustomer_TextChanged(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 ﻿using DAL;
 using DTO;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace BUS
 {
@@ -18,11 +19,6 @@ namespace BUS
             return dalCustomer.InsertCustomer(customer);
         }
 
-        public bool DeleteKhachHang(int id)
-        {
-            return dalCustomer.DeleteCustomer(id);
-        }
-
         public bool UpdateCustomer(DTO_Customer customer)
         {
             return dalCustomer.UpdateCustomer(customer);
@@ -36,6 +32,12 @@ namespace BUS
         public string[] ListCustomerIdName()
         {
             return dalCustomer.ListCustomerIdName();
+        }
+
+        public bool IsValidPhoneNumber(string phoneNumber)
+        {
+            string phonePattern = @"^0\d{9}$";
+            return Regex.IsMatch(phoneNumber, phonePattern);
         }
     }
 }

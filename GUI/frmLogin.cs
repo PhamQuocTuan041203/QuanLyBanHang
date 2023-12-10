@@ -23,15 +23,14 @@ namespace GUI
                     this.Hide();
                     fMain.ShowDialog();
                     this.Show();
-
                     txtEmail.Text = "";
                     txtPassword.Text = "";
                 }
                 else
                 {
                     MessageBox.Show("Sai thông tin đăng nhập!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtEmail.Text = "";
                     txtPassword.Text = "";
+                    txtPassword.Focus();
                 }
             }
             else

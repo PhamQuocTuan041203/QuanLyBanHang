@@ -84,32 +84,6 @@ namespace DAL
             return false;
         }
 
-        public bool DeleteCustomer(int id)
-        {
-            try
-            {
-                _conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _conn;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "DeleteCustomer";
-                cmd.Parameters.AddWithValue("id", id);
-                if (cmd.ExecuteNonQuery() > 0)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                _conn.Close();
-            }
-            return false;
-        }
-
         public DataTable SearchCustomer(string name)
         {
             try

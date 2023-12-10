@@ -31,6 +31,8 @@ namespace GUI
             btnInsert.Enabled = param;
             pcbProduct.Image = null;
 
+            btnInsert.Enabled = true;
+
             if (isLoad)
             {
                 btnUpdate.Enabled = false;
@@ -73,12 +75,17 @@ namespace GUI
         {
             gvProduct.Columns[0].HeaderText = "Mã hàng";
             gvProduct.Columns[1].HeaderText = "Tên hàng";
-            gvProduct.Columns[2].HeaderText = "Số lượng";
-            gvProduct.Columns[3].HeaderText = "Đơn giá nhập";
-            gvProduct.Columns[4].HeaderText = "Đơn giá bán";
+            gvProduct.Columns[2].HeaderText = "SL";
+            gvProduct.Columns[3].HeaderText = "Giá nhập";
+            gvProduct.Columns[4].HeaderText = "Giá bán";
             gvProduct.Columns[5].HeaderText = "Hình ảnh";
             gvProduct.Columns[6].HeaderText = "Ghi chú";
 
+            gvProduct.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvProduct.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvProduct.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvProduct.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            
             foreach (DataGridViewColumn item in gvProduct.Columns)
                 item.DividerWidth = 1;
 
@@ -86,15 +93,20 @@ namespace GUI
             imgCol = (DataGridViewImageColumn)gvProduct.Columns[5];
             imgCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
 
-            gvProduct.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvProduct.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvProduct.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            gvProduct.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            gvProduct.RowTemplate.Height = 90;
+            gvProduct.Columns[2].Width = 60;
+            gvProduct.Columns[3].Width = 100;
+            gvProduct.Columns[4].Width = 100;
+            gvProduct.Columns[5].Width = 90;
         }
 
         private bool CheckIsNummber(string text)
         {
-            return int.TryParse(text, out int s);
+            if (int.TryParse(text, out int number))
+            {
+                return number >= 0;
+            }
+            return false;
         }
 
         private void OpenImage()
@@ -123,9 +135,9 @@ namespace GUI
         private void btnInsert_Click(object sender, EventArgs e)
         {
             if (!CheckIsNummber(txtQuantity.Text) || !CheckIsNummber(txtUnitPrice.Text) || !CheckIsNummber(txtImportUnitPrice.Text))
-                MsgBox("Vui lòng nhập chữ số!", true);
+                MsgBox("Vui lòng nhập số đúng định dạng!", true);
             else if (txtName.Text == "")
-                MsgBox("Thiếu trường thông tin!", true);
+                MsgBox("Vui lòng nhập tên sản phẩm!", true);
             else if (pcbProduct.Image == null)
                 MsgBox("Vui lòng chọn hình!", true);
             else
@@ -143,11 +155,11 @@ namespace GUI
                 {
                     gvProduct.DataSource = busProduct.ListOfProducts();
                     LoadGridView();
-                    MsgBox("Thêm sản phẩm thành công");
+                    MsgBox("Thêm sản phẩm thành công!");
                 }
                 else
                 {
-                    MsgBox("Thêm sản phẩm không được", true);
+                    MsgBox("Không thể thêm sản phẩm!", true);
                 }
             }
         }
@@ -161,6 +173,7 @@ namespace GUI
         {
             if (gvProduct.Rows.Count > 0)
             {
+                btnInsert.Enabled = false;
                 btnUpdate.Enabled = true;
                 btnDelete.Enabled = true;
 
@@ -182,11 +195,11 @@ namespace GUI
             if (MessageBox.Show("Bạn có chắc muốn sửa?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (!CheckIsNummber(txtQuantity.Text) || !CheckIsNummber(txtUnitPrice.Text) || !CheckIsNummber(txtImportUnitPrice.Text))
-                    MsgBox("Vui lòng nhập chữ số!", true);
+                    MsgBox("Vui lòng nhập số đúng định dạng!", true);
                 else if (txtName.Text == "")
-                    MsgBox("Thiếu trường thông tin!", true);
+                    MsgBox("Vui lòng nhập tên sản phẩm!", true);
                 else if (pcbProduct.Image == null)
-                    MsgBox("Vui lòng chọn hình!", true);
+                    MsgBox("Vui lòng chọn hình ảnh!", true);
                 else
                 {
                     dtoProduct = new DTO_Product
@@ -207,7 +220,7 @@ namespace GUI
                     }
                     else
                     {
-                        MsgBox("Sửa sản phẩm không được", true);
+                        MsgBox("Không thể sửa sản phẩm!", true);
                     }
                 }
             }
@@ -224,12 +237,17 @@ namespace GUI
                     MsgBox("Xóa thành công");
                 }
                 else
-                    MsgBox("Xóa không thành công!");
+                    MsgBox("Không thể xóa sản phẩm!");
             }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            gvProduct.DataSource = busProduct.ListOfProducts();
+            LoadGridView();
+            SetValue(true, false);
+            txtName.Focus();
+
             SetValue(true, false);
         }
 

@@ -22,15 +22,5 @@ namespace BUS
         {
             return dalBillInfo.GetTotalPrice();
         }
-
-        public bool DeleteProductInBillInfo(int id)
-        {
-            return dalBillInfo.DeleteProductInBillInfo(id);
-        }
-
-        public bool UpdateProductInBillInfo(int id, int quantity)
-        {
-            return dalBillInfo.UpdateProductInBillInfo(id, quantity);
-        }
     }
 }

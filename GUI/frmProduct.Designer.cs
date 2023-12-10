@@ -65,10 +65,10 @@
             // 
             this.guna2Panel3.Controls.Add(this.gvProduct);
             this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2Panel3.Location = new System.Drawing.Point(0, 366);
+            this.guna2Panel3.Location = new System.Drawing.Point(0, 370);
             this.guna2Panel3.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel3.Name = "guna2Panel3";
-            this.guna2Panel3.Size = new System.Drawing.Size(1248, 348);
+            this.guna2Panel3.Size = new System.Drawing.Size(1248, 344);
             this.guna2Panel3.TabIndex = 4;
             // 
             // gvProduct
@@ -105,7 +105,7 @@
             this.gvProduct.RowHeadersVisible = false;
             this.gvProduct.RowHeadersWidth = 51;
             this.gvProduct.RowTemplate.Height = 35;
-            this.gvProduct.Size = new System.Drawing.Size(1248, 348);
+            this.gvProduct.Size = new System.Drawing.Size(1248, 344);
             this.gvProduct.TabIndex = 0;
             this.gvProduct.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gvProduct.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -147,13 +147,13 @@
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtSearch.ForeColor = System.Drawing.Color.White;
             this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearch.Location = new System.Drawing.Point(651, 288);
+            this.txtSearch.Location = new System.Drawing.Point(662, 289);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(5);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
-            this.txtSearch.PlaceholderText = "Nhập tên Sản Phẩm để tìm kiếm";
+            this.txtSearch.PlaceholderText = "Nhập tên để tìm kiếm";
             this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(330, 44);
+            this.txtSearch.Size = new System.Drawing.Size(308, 44);
             this.txtSearch.TabIndex = 4;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -248,7 +248,7 @@
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1248, 366);
+            this.guna2Panel1.Size = new System.Drawing.Size(1248, 370);
             this.guna2Panel1.TabIndex = 3;
             // 
             // pcbProduct

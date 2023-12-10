@@ -71,58 +71,5 @@ namespace DAL
                 _conn.Close();
             }
         }
-
-        public bool DeleteProductInBillInfo(int id)
-        {
-            try
-            {
-                _conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _conn;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "DeleteProductInBillInfo";
-                cmd.Parameters.AddWithValue("id", id);
-                if (cmd.ExecuteNonQuery() > 0)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                _conn.Close();
-            }
-            return false;
-        }
-
-        public bool UpdateProductInBillInfo(int id, int quantity)
-        {
-            try
-            {
-                _conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _conn;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "UpdateProductInBillInfo";
-                cmd.Parameters.AddWithValue("id", id);
-                cmd.Parameters.AddWithValue("quantity", quantity);
-                if (cmd.ExecuteNonQuery() > 0)
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                _conn.Close();
-            }
-            return false;
-        }
     }
 }

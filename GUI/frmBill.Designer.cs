@@ -46,9 +46,9 @@
             this.guna2Panel1.Controls.Add(this.btnCreate);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1227, 131);
+            this.guna2Panel1.Size = new System.Drawing.Size(1227, 140);
             this.guna2Panel1.TabIndex = 2;
             // 
             // txtSearch
@@ -68,11 +68,11 @@
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtSearch.ForeColor = System.Drawing.Color.White;
             this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearch.Location = new System.Drawing.Point(288, 47);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.txtSearch.Location = new System.Drawing.Point(14, 64);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(5);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
-            this.txtSearch.PlaceholderText = "Nhập tên KH để tìm kiếm";
+            this.txtSearch.PlaceholderText = "Nhập tên để tìm kiếm";
             this.txtSearch.SelectedText = "";
             this.txtSearch.Size = new System.Drawing.Size(336, 44);
             this.txtSearch.TabIndex = 4;
@@ -92,8 +92,8 @@
             this.btnCreate.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnCreate.ForeColor = System.Drawing.Color.White;
-            this.btnCreate.Location = new System.Drawing.Point(671, 42);
-            this.btnCreate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCreate.Location = new System.Drawing.Point(1034, 53);
+            this.btnCreate.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(180, 55);
             this.btnCreate.TabIndex = 0;
@@ -126,14 +126,14 @@
             this.gvBill.DefaultCellStyle = dataGridViewCellStyle3;
             this.gvBill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvBill.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.gvBill.Location = new System.Drawing.Point(0, 131);
-            this.gvBill.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gvBill.Location = new System.Drawing.Point(0, 140);
+            this.gvBill.Margin = new System.Windows.Forms.Padding(4);
             this.gvBill.Name = "gvBill";
             this.gvBill.ReadOnly = true;
             this.gvBill.RowHeadersVisible = false;
             this.gvBill.RowHeadersWidth = 51;
             this.gvBill.RowTemplate.Height = 35;
-            this.gvBill.Size = new System.Drawing.Size(1227, 535);
+            this.gvBill.Size = new System.Drawing.Size(1227, 526);
             this.gvBill.TabIndex = 3;
             this.gvBill.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.gvBill.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -165,7 +165,7 @@
             this.Controls.Add(this.gvBill);
             this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmBill";
             this.Text = "Hoá đơn";
             this.Load += new System.EventHandler(this.frmBill_Load);

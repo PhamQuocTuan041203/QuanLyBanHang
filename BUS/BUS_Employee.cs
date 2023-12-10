@@ -81,11 +81,6 @@ namespace BUS
             return dalEmployee.UpdateEmployeeAddressPhoneNumber(employee);
         }
 
-        public bool DeleteEmployee(int id)
-        {
-            return dalEmployee.DeleteEmployee(id);
-        }
-
         public DataTable SearchEmployee(string name)
         {
             return dalEmployee.SearchEmployee(name);

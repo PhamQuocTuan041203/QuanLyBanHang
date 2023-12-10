@@ -28,12 +28,10 @@ namespace GUI
             if (isLoad)
             {
                 btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
             }
             else
             {
                 btnUpdate.Enabled = !param;
-                btnDelete.Enabled = !param;
             }
         }
 
@@ -61,23 +59,56 @@ namespace GUI
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            bool isTrueSDT = int.TryParse(txtPhoneNumber.Text, out int sdt);
-
-            if (isTrueSDT && txtPhoneNumber.Text != "" && txtName.Text != "")
+            if (txtAddress.Text != "" && txtPhoneNumber.Text != "" && txtName.Text != "")
             {
-                dtoCustomer = new DTO_Customer(txtName.Text, txtAddress.Text, txtPhoneNumber.Text);
-                if (busCustomer.InsertKhachHang(dtoCustomer))
+                if (busCustomer.IsValidPhoneNumber(txtPhoneNumber.Text))
                 {
-                    MsgBox("Thêm khách hàng thành công!");
-                    gvCustomer.DataSource = busCustomer.ListOfCustomers();
-                    LoadGridView();
-                    SetValue(true, false);
+                    dtoCustomer = new DTO_Customer(txtName.Text, txtAddress.Text, txtPhoneNumber.Text);
+
+                    if (busCustomer.InsertKhachHang(dtoCustomer))
+                    {
+                        MsgBox("Thêm khách hàng thành công!");
+                        gvCustomer.DataSource = busCustomer.ListOfCustomers();
+                        LoadGridView();
+                        refesh();
+                    }
+                    else
+                        MsgBox("Không thể thêm khách hàng!", true);
                 }
                 else
-                    MsgBox("Thêm khách hàng không thành công", true);
+                    MsgBox("Số điện thoại không hợp lệ!", true);
             }
             else
-                MsgBox("Vui lòng kiểm tra lại dữ liệu", true);
+                MsgBox("Vui lòng nhập đầy đủ thông tin!", true);
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (txtAddress.Text != "" && txtPhoneNumber.Text != "" && txtName.Text != "")
+            {
+                if (busCustomer.IsValidPhoneNumber(txtPhoneNumber.Text))
+                {
+
+                    if (MessageBox.Show("Bạn có chắc muốn cập nhật?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        dtoCustomer = new DTO_Customer(int.Parse(txtId.Text), txtName.Text, txtAddress.Text, txtPhoneNumber.Text);
+
+                        if (busCustomer.UpdateCustomer(dtoCustomer))
+                        {
+                            MsgBox("Cập nhật khách hàng thành công!");
+                            gvCustomer.DataSource = busCustomer.ListOfCustomers();
+                            LoadGridView();
+                            refesh();
+                        }
+                        else
+                            MsgBox("Không thể cập nhật khách hàng!", true);
+                    }
+                }
+                else
+                    MsgBox("Số điện thoại không hợp lệ!", true);
+            }
+            else
+                MsgBox("Vui lòng nhập đầy đủ thông tin!", true);
         }
 
         private void frmCustomer_Load(object sender, EventArgs e)
@@ -88,58 +119,18 @@ namespace GUI
             txtName.Focus();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Bạn có chắc muốn xóa", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                if (busCustomer.DeleteKhachHang(int.Parse(txtId.Text)))
-                {
-                    MsgBox("Xóa thành công");
-                    gvCustomer.DataSource = busCustomer.ListOfCustomers();
-                    LoadGridView();
-                    SetValue(true, false);
-                }
-                else
-                    MsgBox("Không xóa được", true);
-            }
-        }
-
         private void gvCustomer_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (gvCustomer.Rows.Count > 0)
             {
+                btnInsert.Enabled = false;
                 btnUpdate.Enabled = true;
-                btnDelete.Enabled = true;
 
                 txtId.Text = gvCustomer.CurrentRow.Cells[0].Value.ToString();
                 txtName.Text = gvCustomer.CurrentRow.Cells[1].Value.ToString();
                 txtAddress.Text = gvCustomer.CurrentRow.Cells[2].Value.ToString();
                 txtPhoneNumber.Text = gvCustomer.CurrentRow.Cells[3].Value.ToString();
             }
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            bool isTruePhoneNumber = int.TryParse(txtPhoneNumber.Text, out int num);
-
-            if (isTruePhoneNumber && txtPhoneNumber.Text != "" && txtName.Text != "")
-            {
-                if (MessageBox.Show("Bạn có chắc muốn sửa?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    dtoCustomer = new DTO_Customer(int.Parse(txtId.Text), txtName.Text, txtAddress.Text, txtPhoneNumber.Text);
-                    if (busCustomer.UpdateCustomer(dtoCustomer))
-                    {
-                        MsgBox("Sửa khách hàng thành công!");
-                        gvCustomer.DataSource = busCustomer.ListOfCustomers();
-                        LoadGridView();
-                        SetValue(true, false);
-                    }
-                    else
-                        MsgBox("Sửa khách hàng không thành công", true);
-                }
-            }
-            else
-                MsgBox("Vui lòng kiểm tra lại dữ liệu", true);
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -157,9 +148,19 @@ namespace GUI
             }
         }
 
+        private void refesh()
+        {
+            btnInsert.Enabled = true;
+            SetValue(true, false);
+            txtId.Text = "";
+            txtName.Text = "";
+            txtAddress.Text = "";
+            txtPhoneNumber.Text = "";
+        }
+
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            SetValue(true, false);
+            refesh();
         }
     }
 }

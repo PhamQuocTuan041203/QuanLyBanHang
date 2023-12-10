@@ -64,12 +64,10 @@ namespace GUI
             if (isLoad)
             {
                 btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
             }
             else
             {
                 btnUpdate.Enabled = !param;
-                btnDelete.Enabled = !param;
             }
         }
 
@@ -85,7 +83,6 @@ namespace GUI
         {
             btnInsert.Enabled = false;
             btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
             radNonActive.Enabled = true;
             radActive.Enabled = true;
             radEmployee.Enabled = true;
@@ -171,23 +168,6 @@ namespace GUI
             else MsgBox("Thiếu trường thông tin!", true);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                id = int.Parse(gvEmployee.CurrentRow.Cells[0].Value.ToString());
-                if (busEmployee.DeleteEmployee(id))
-                {
-                    SetValue(true, false);
-                    gvEmployee.DataSource = busEmployee.ListOfEmployees();
-                    LoadGridView();
-                    MsgBox("Xóa nhân viên thành công!");
-                }
-                else
-                    MsgBox("Xóa nhân viên không thành công", true);
-            }
-        }
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             name = txtSearch.Text.Trim();

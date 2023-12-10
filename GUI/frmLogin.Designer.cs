@@ -52,7 +52,7 @@
             // 
             // guna2PictureBox2
             // 
-            this.guna2PictureBox2.Image = global::GUI.Properties.Resources.sales_management_software_500x500;
+            this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
             this.guna2PictureBox2.Location = new System.Drawing.Point(0, 0);
             this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(4);
@@ -120,10 +120,10 @@
             this.btnLogin.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(112, 443);
+            this.btnLogin.Location = new System.Drawing.Point(196, 447);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(349, 55);
+            this.btnLogin.Size = new System.Drawing.Size(182, 55);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Đăng nhập";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -158,7 +158,7 @@
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtPassword.ForeColor = System.Drawing.Color.White;
             this.txtPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtPassword.Location = new System.Drawing.Point(112, 319);
+            this.txtPassword.Location = new System.Drawing.Point(113, 319);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(5);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -183,7 +183,7 @@
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtEmail.ForeColor = System.Drawing.Color.White;
             this.txtEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtEmail.Location = new System.Drawing.Point(112, 244);
+            this.txtEmail.Location = new System.Drawing.Point(113, 244);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.PasswordChar = '\0';
@@ -194,9 +194,9 @@
             // 
             // guna2PictureBox1
             // 
-            this.guna2PictureBox1.Image = global::GUI.Properties.Resources.shopify_100px;
+            this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(188, 43);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(189, 43);
             this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
             this.guna2PictureBox1.Size = new System.Drawing.Size(197, 151);

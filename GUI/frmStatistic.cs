@@ -23,10 +23,8 @@ namespace GUI
 
         public void Bar(GunaChart chart)
         {
-            // Chart configuration 
             chart.YAxes.GridLines.Display = false;
             chart.Title.Text = "Tổng doanh thu tháng";
-
             var dataset = new GunaBarDataset
             {
                 Label = "Doanh thu"

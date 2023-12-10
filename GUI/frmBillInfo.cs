@@ -14,6 +14,7 @@ namespace GUI
         BUS_Bill busBill = new BUS_Bill();
         DTO_BillInfo dtoBillInfo;
         DTO_Bill dtoBill;
+
         private string[] listCustomerIdName, listProductNameQuantity;
         private DateTime dateTime = new DateTime();
         private string productName, email, str;
@@ -29,6 +30,7 @@ namespace GUI
         private void LoadData()
         {
             listCustomerIdName = busCustomer.ListCustomerIdName();
+
             cboCustomerIdName.Items.Clear();
             foreach (string item in listCustomerIdName)
             {
@@ -62,13 +64,22 @@ namespace GUI
             gvBillInfo.Columns[1].HeaderText = "Tên SP";
             gvBillInfo.Columns[2].HeaderText = "Số lượng";
             gvBillInfo.Columns[3].HeaderText = "Thành tiền";
+
             foreach (DataGridViewColumn item in gvBillInfo.Columns)
             {
                 item.DividerWidth = 1;
             }
+
             gvBillInfo.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvBillInfo.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             gvBillInfo.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
+        private void frmBillInfo_Load(object sender, EventArgs e)
+        {
+            LoadData();
+            gvBillInfo.DataSource = busBillInfo.ListBillInfo();
+            LoadGridView();
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
@@ -86,78 +97,19 @@ namespace GUI
                     int.Parse(txtQuantity.Text),
                     double.Parse(txtUnitPrice.Text)
                 );
-                if (busBillInfo.InsertBillInfo(dtoBillInfo, int.Parse(txtQuantity.Text)))
+
+                if (busBillInfo.InsertBillInfo(dtoBillInfo, int.Parse(txtQuantity.Text)) && SL>?)
                 {
                     gvBillInfo.DataSource = busBillInfo.ListBillInfo();
                     LoadGridView();
                     txtTotalPrice.Text = busBillInfo.GetTotalPrice().ToString();
+                    MsgBox("Đã thêm!");
                 }
                 else
-                    MsgBox("Thêm không thành công", true);
+                    MsgBox("Không thể thêm!", true);
             }
             else
-                MsgBox("Vui lòng kiểm tra lại dữ liệu", true);
-        }
-
-        private void frmBillInfo_Load(object sender, EventArgs e)
-        {
-            txtQuantity.Text = null;
-            txtUnitPrice.Text = null;
-            txtTotalPrice.Text = null;
-            LoadData();
-            gvBillInfo.DataSource = busBillInfo.ListBillInfo();
-            LoadGridView();
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            int id = busProduct.GetProductId(productName);
-            str = cboProductNameQuantity.SelectedItem.ToString();
-            strlist = str.Split(separator);
-            if (busBillInfo.UpdateProductInBillInfo(id, int.Parse(txtQuantity.Text)))
-            {
-                gvBillInfo.DataSource = busBillInfo.ListBillInfo();
-                LoadGridView();
-                txtTotalPrice.Text = busBillInfo.GetTotalPrice().ToString();
-                MsgBox("Sửa sản phẩm thành công!");
-            }
-            else
-            {
-                MsgBox("Sửa sản phẩm không được", true);
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            int id = busProduct.GetProductId(productName);
-            if (MessageBox.Show("Bạn có chắc muốn xóa", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                if (busBillInfo.DeleteProductInBillInfo(id))
-                {
-                    MsgBox("Xóa thành công");
-                    LoadData();
-                    gvBillInfo.DataSource = busBillInfo.ListBillInfo();
-                    LoadGridView();
-                }
-                else
-                    MsgBox("Không xóa được", true);
-            }
-        }
-
-        private void gvBillInfo_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (gvBillInfo.Rows.Count > 0)
-            //{
-            //    cbo = gvProduct.CurrentRow.Cells[0].Value.ToString();
-            //    txtName.Text = gvProduct.CurrentRow.Cells[1].Value.ToString();
-            //    txtQuantity.Text = gvProduct.CurrentRow.Cells[2].Value.ToString();
-            //    txtImportUnitPrice.Text = gvProduct.CurrentRow.Cells[3].Value.ToString();
-            //    txtUnitPrice.Text = gvProduct.CurrentRow.Cells[4].Value.ToString();
-
-            //    MemoryStream memoryStream = new MemoryStream((byte[])gvProduct.CurrentRow.Cells[5].Value);
-            //    pcbProduct.Image = Image.FromStream(memoryStream);
-            //    txtNote.Text = gvProduct.CurrentRow.Cells[6].Value.ToString();
-            //}
+                MsgBox("Vui lòng nhập đủ dữ liệu!", true);
         }
 
         private void btnPay_Click(object sender, EventArgs e)
@@ -172,16 +124,21 @@ namespace GUI
 
             dtoBill = new DTO_Bill
             (
-                int.Parse(employeeId), 
-                int.Parse(customerId), 
+                int.Parse(employeeId),
+                int.Parse(customerId),
                 double.Parse(txtTotalPrice.Text)
             );
+
             if (busBill.InsertBill(dtoBill))
             {
+                MsgBox("Thanh toán thành công!");
+                txtQuantity.Text = null;
+                txtUnitPrice.Text = null;
+                txtTotalPrice.Text = null;
                 this.Close();
             }
             else
-                MsgBox("Thanh toán không thành công", true);
+                MsgBox("Thanh toán thất bại!", true);
         }
 
         private void cboProductName_SelectedIndexChanged(object sender, EventArgs e)
@@ -191,14 +148,6 @@ namespace GUI
             String[] strlist = str.Split(separator);
             productName = strlist[0].Trim();
             txtUnitPrice.Text = busProduct.GetUnitPrice(productName).ToString();
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            txtQuantity.Text = null;
-            txtUnitPrice.Text = null;
-            txtTotalPrice.Text = null;
-            LoadData();
         }
     }
 }
