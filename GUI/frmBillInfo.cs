@@ -17,7 +17,7 @@ namespace GUI
 
         private string[] listCustomerIdName, listProductNameQuantity;
         private DateTime dateTime = new DateTime();
-        private string productName, email, str;
+        private string productName, email, str, productQuantity;
         private char separator = '|';
         private string[] strlist;
 
@@ -80,6 +80,7 @@ namespace GUI
             LoadData();
             gvBillInfo.DataSource = busBillInfo.ListBillInfo();
             LoadGridView();
+            btnPay.Enabled = false;
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
@@ -91,22 +92,32 @@ namespace GUI
             if (txtQuantity.Text != "" && cboCustomerIdName.SelectedIndex != -1 &&
                 cboProductNameQuantity.SelectedIndex != -1)
             {
-                dtoBillInfo = new DTO_BillInfo
-                (
-                    busProduct.GetProductId(productName),
-                    int.Parse(txtQuantity.Text),
-                    double.Parse(txtUnitPrice.Text)
-                );
 
-                if (busBillInfo.InsertBillInfo(dtoBillInfo, int.Parse(txtQuantity.Text)) && SL>?)
+                if ((int.Parse(txtQuantity.Text) <= int.Parse(productQuantity)))
                 {
-                    gvBillInfo.DataSource = busBillInfo.ListBillInfo();
-                    LoadGridView();
-                    txtTotalPrice.Text = busBillInfo.GetTotalPrice().ToString();
-                    MsgBox("Đã thêm!");
+                    dtoBillInfo = new DTO_BillInfo
+                    (
+                        busProduct.GetProductId(productName),
+                        int.Parse(txtQuantity.Text),
+                        double.Parse(txtUnitPrice.Text)
+                    );
+
+                    if (busBillInfo.InsertBillInfo(dtoBillInfo, int.Parse(txtQuantity.Text)))
+                    {
+                        gvBillInfo.DataSource = busBillInfo.ListBillInfo();
+                        LoadGridView();
+                        txtTotalPrice.Text = busBillInfo.GetTotalPrice().ToString();
+                        btnPay.Enabled = true;
+                        MsgBox("Đã thêm!");
+                    }
+                    else
+                        MsgBox("Không thể thêm!", true);
                 }
                 else
-                    MsgBox("Không thể thêm!", true);
+                {
+                    MsgBox("Vượt quá số lượng đang có!", true);
+                }
+
             }
             else
                 MsgBox("Vui lòng nhập đủ dữ liệu!", true);
@@ -147,6 +158,7 @@ namespace GUI
             char separator = '|';
             String[] strlist = str.Split(separator);
             productName = strlist[0].Trim();
+            productQuantity = strlist[1].Trim();
             txtUnitPrice.Text = busProduct.GetUnitPrice(productName).ToString();
         }
     }

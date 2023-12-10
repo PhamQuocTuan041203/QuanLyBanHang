@@ -28,7 +28,6 @@ namespace DAL
 
         public bool InsertBillInfo(DTO_BillInfo billInfo, int quantity)
         {
-
             try
             {
                 _conn.Open();
@@ -44,15 +43,10 @@ namespace DAL
                 else
                     return false;
             }
-            catch (Exception)
-            {
-
-            }
             finally
             {
                 _conn.Close();
             }
-            return false;
         }
 
         public double GetTotalPrice()

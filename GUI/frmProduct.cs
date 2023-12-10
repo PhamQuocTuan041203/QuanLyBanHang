@@ -23,15 +23,16 @@ namespace GUI
         private void SetValue(bool param, bool isLoad)
         {
             txtId.Text = null;
+            txtName.Focus();
             txtName.Text = null;
             txtQuantity.Text = null;
             txtUnitPrice.Text = null;
             txtImportUnitPrice.Text = null;
             txtNote.Text = null;
-            btnInsert.Enabled = param;
-            pcbProduct.Image = null;
 
+            btnInsert.Enabled = param;
             btnInsert.Enabled = true;
+            pcbProduct.Image = null;
 
             if (isLoad)
             {
@@ -73,8 +74,8 @@ namespace GUI
 
         private void LoadGridView()
         {
-            gvProduct.Columns[0].HeaderText = "Mã hàng";
-            gvProduct.Columns[1].HeaderText = "Tên hàng";
+            gvProduct.Columns[0].HeaderText = "Mã";
+            gvProduct.Columns[1].HeaderText = "Tên";
             gvProduct.Columns[2].HeaderText = "SL";
             gvProduct.Columns[3].HeaderText = "Giá nhập";
             gvProduct.Columns[4].HeaderText = "Giá bán";
@@ -94,6 +95,8 @@ namespace GUI
             imgCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
 
             gvProduct.RowTemplate.Height = 90;
+            gvProduct.Columns[0].Width = 80;
+            gvProduct.Columns[1].Width = 300;
             gvProduct.Columns[2].Width = 60;
             gvProduct.Columns[3].Width = 100;
             gvProduct.Columns[4].Width = 100;
@@ -132,38 +135,6 @@ namespace GUI
             txtName.Focus();
         }
 
-        private void btnInsert_Click(object sender, EventArgs e)
-        {
-            if (!CheckIsNummber(txtQuantity.Text) || !CheckIsNummber(txtUnitPrice.Text) || !CheckIsNummber(txtImportUnitPrice.Text))
-                MsgBox("Vui lòng nhập số đúng định dạng!", true);
-            else if (txtName.Text == "")
-                MsgBox("Vui lòng nhập tên sản phẩm!", true);
-            else if (pcbProduct.Image == null)
-                MsgBox("Vui lòng chọn hình!", true);
-            else
-            {
-                dtoProduct = new DTO_Product
-                (
-                    txtName.Text,
-                    int.Parse(txtQuantity.Text),
-                    int.Parse(txtImportUnitPrice.Text),
-                    int.Parse(txtUnitPrice.Text),
-                    ImageToByteArray(pcbProduct),
-                    txtNote.Text
-                );
-                if (busProduct.InsertProduct(dtoProduct))
-                {
-                    gvProduct.DataSource = busProduct.ListOfProducts();
-                    LoadGridView();
-                    MsgBox("Thêm sản phẩm thành công!");
-                }
-                else
-                {
-                    MsgBox("Không thể thêm sản phẩm!", true);
-                }
-            }
-        }
-
         private void btnInsertPicture_Click(object sender, EventArgs e)
         {
             OpenImage();
@@ -187,6 +158,37 @@ namespace GUI
                 MemoryStream memoryStream = new MemoryStream((byte[])gvProduct.CurrentRow.Cells[5].Value);
                 pcbProduct.Image = Image.FromStream(memoryStream);
                 txtNote.Text = gvProduct.CurrentRow.Cells[6].Value.ToString();
+            }
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            if (!CheckIsNummber(txtQuantity.Text) || !CheckIsNummber(txtUnitPrice.Text) || !CheckIsNummber(txtImportUnitPrice.Text))
+                MsgBox("Vui lòng nhập số đúng định dạng!", true);
+            else if (txtName.Text == "")
+                MsgBox("Vui lòng nhập tên sản phẩm!", true);
+            else if (pcbProduct.Image == null)
+                MsgBox("Vui lòng chọn hình!", true);
+            else
+            {
+                dtoProduct = new DTO_Product
+                (
+                    txtName.Text,
+                    int.Parse(txtQuantity.Text),
+                    int.Parse(txtImportUnitPrice.Text),
+                    int.Parse(txtUnitPrice.Text),
+                    ImageToByteArray(pcbProduct),
+                    txtNote.Text
+                );
+                if (busProduct.InsertProduct(dtoProduct))
+                {
+                    gvProduct.DataSource = busProduct.ListOfProducts();
+                    LoadGridView();
+                    SetValue(true, false);
+                    MsgBox("Thêm sản phẩm thành công!");
+                }
+                else
+                    MsgBox("Không thể thêm sản phẩm!", true);
             }
         }
 
@@ -216,6 +218,7 @@ namespace GUI
                     {
                         gvProduct.DataSource = busProduct.ListOfProducts();
                         LoadGridView();
+                        SetValue(true, false);
                         MsgBox("Sửa sản phẩm thành công!");
                     }
                     else
@@ -245,9 +248,6 @@ namespace GUI
         {
             gvProduct.DataSource = busProduct.ListOfProducts();
             LoadGridView();
-            SetValue(true, false);
-            txtName.Focus();
-
             SetValue(true, false);
         }
 
