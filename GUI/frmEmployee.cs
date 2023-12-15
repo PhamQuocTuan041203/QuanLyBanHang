@@ -2,8 +2,6 @@
 using DTO;
 using System;
 using System.Data;
-using System.Net.Mail;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace GUI
@@ -62,13 +60,9 @@ namespace GUI
             radActive.Checked = true;
 
             if (isLoad)
-            {
                 btnUpdate.Enabled = false;
-            }
             else
-            {
                 btnUpdate.Enabled = !param;
-            }
         }
 
         private void MsgBox(string message, bool isError = false)
@@ -99,6 +93,7 @@ namespace GUI
                 radAdmin.Checked = true;
             else
                 radEmployee.Checked = true;
+
             if (status)
                 radActive.Checked = true;
             else
