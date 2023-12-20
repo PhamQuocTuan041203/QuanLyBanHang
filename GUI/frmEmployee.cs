@@ -9,7 +9,6 @@ namespace GUI
     public partial class frmEmployee : Form
     {
         BUS_Employee busEmployee = new BUS_Employee();
-        private int id;
         private string name;
         private bool role;
         private bool status;
@@ -107,7 +106,7 @@ namespace GUI
             {
                 if (busEmployee.IsValidEmail(txtEmail.Text))
                 {
-                    if (busEmployee.IsExistEmail(txtPhoneNumber.Text))
+                    if (!busEmployee.IsExistEmail(txtEmail.Text))
                     {
                         if (busEmployee.IsValidPhoneNumber(txtPhoneNumber.Text))
                         {
@@ -121,9 +120,11 @@ namespace GUI
                                 SetValue(true, false);
                                 gvEmployee.DataSource = busEmployee.ListOfEmployees();
                                 LoadGridView();
+
                                 SendMail sendMail = new SendMail(dtoEmployee.Email, password);
                                 sendMail.ShowDialog();
-                                MsgBox("Nhân viên đã được thêm mới.\n"
+
+                                MsgBox("Thêm thành công.\n"
                                     + sendMail.Result);
                             }
                             else

@@ -53,6 +53,7 @@ namespace GUI
                         {
                             SendMail loader = new SendMail(txtEmail.Text, password, true);
                             loader.ShowDialog();
+
                             MessageBox.Show("Mật khẩu đã được tạo mới.\n"
                                 + loader.Result, "Thông báo");
                         }
@@ -60,7 +61,11 @@ namespace GUI
                             MessageBox.Show("Không thực hiện được", "Thông báo");
                     }
                 }
+                else
+                    MessageBox.Show("Email không tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+                MessageBox.Show("Vui lòng nhập Email!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

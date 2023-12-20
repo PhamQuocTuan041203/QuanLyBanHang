@@ -42,7 +42,7 @@ namespace GUI
                     busEmployee = new BUS_Employee();
                     if (busEmployee.ChangePassword(txtEmail.Text, txtOldPassword.Text, txtNewPassword.Text))
                     {
-                        MessageBox.Show("Đổi mật khẩu thành công, vui lòng đăng nhập lại.", "Thông báo",
+                        MessageBox.Show("Đổi mật khẩu thành công!\nYêu cầu đăng nhập lại!", "Thông báo",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Properties.Settings.Default.password = "";
                         Properties.Settings.Default.Save();
