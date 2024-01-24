@@ -18,20 +18,17 @@ namespace DAL
                 cmd.CommandText = "Login";
                 cmd.Parameters.AddWithValue("email", email);
                 cmd.Parameters.AddWithValue("password", password);
+
                 if (Convert.ToInt16(cmd.ExecuteScalar()) == 1)
                     return true;
                 else
                     return false;
-            }
-            catch (Exception)
-            {
 
             }
             finally
             {
                 _conn.Close();
             }
-            return false;
         }
 
         public bool IsExistEmail(string email)
@@ -104,7 +101,7 @@ namespace DAL
             }
             catch (Exception)
             {
-                
+
             }
             finally
             {

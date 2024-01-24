@@ -32,7 +32,6 @@ namespace BUS
 
         public bool Login(string email, string password)
         {
-
             password = Encrytion(password);
             return dalEmployee.Login(email, password);
         }
